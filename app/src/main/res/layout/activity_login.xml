@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp"
+    android:paddingTop="50dp"
+    android:orientation="vertical"
+    tools:context=".Activity.Login">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#008000"
+        android:text="동네세탁"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="100dp"
+        tools:ignore="RtlCompat" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="30dp"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:maxLines="1"
+            android:id="@+id/text_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            >
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="50dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_Pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:maxLines="1"></com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_Login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:text="로그인"
+        android:backgroundTint="#81c147"
+        android:textColor="@color/white"
+        />
+    <Button
+        android:id="@+id/btn_Regist"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:backgroundTint="#81c147"
+        android:text="회원가입"
+        android:textColor="@color/white"
+        />
+</LinearLayout>

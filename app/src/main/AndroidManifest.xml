@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.dry">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <application
+        android:name=".Retrofit.FileModel"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/write"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Write"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activity.ChatList"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".none.MainActivity" />
+        <activity android:name=".Activity.Reply" />
+        <activity android:name=".none.MainActivity2" />
+        <activity
+            android:name=".Activity.BoardWrite"
+            android:label="@string/write" />
+        <activity
+            android:name=".Activity.BoardUpdate"
+            android:label="@string/write"
+            android:theme="@style/Theme.Write" />
+        <activity android:name=".Activity.Location" />
+        <activity
+            android:name=".Activity.Withdrawal"
+            android:label="@string/profile"
+            android:theme="@style/Theme.profile" />
+        <activity
+            android:name=".Activity.ChangePassword"
+            android:label="@string/profile"
+            android:theme="@style/Theme.profile" />
+        <activity
+            android:name=".Activity.Profile"
+            android:label="@string/profile"
+            android:theme="@style/Theme.profile" />
+        <activity android:name=".Activity.Home" />
+        <activity
+            android:name=".Activity.Register"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Dry" />
+        <activity
+            android:name=".Activity.Authentication"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Dry" />
+        <!-- 로그인, 액티비티 전체 바꿔야 함 -->
+        <activity android:name=".Activity.Chat"
+            android:label="@string/chat"
+            android:theme="@style/Theme.Dry"
+            />
+            <activity
+                android:name=".Activity.Login"
+                android:label="@string/app_name"
+                android:theme="@style/Theme.Dry" />
+                <activity
+                    android:name=".Activity.Board"
+                    android:theme="@style/Theme.Write">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.dry.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="wh373bmxn5" />
+    </application>
+
+</manifest>

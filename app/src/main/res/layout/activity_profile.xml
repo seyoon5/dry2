@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.Profile">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_profile_userPhoto"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/user_icon"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp"
+            android:layout_marginTop="30dp"
+            />
+
+            <ImageButton
+                android:id="@+id/btn_profile_pick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="-4dp"
+                android:layout_marginBottom="-4dp"
+                android:layout_alignBottom="@+id/civ_profile_userPhoto"
+                android:layout_alignRight="@+id/civ_profile_userPhoto"
+                android:src="@drawable/ic_baseline_camera_alt_24"
+                />
+                <Button
+                    android:id="@+id/btn_profile_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/lineProfile"
+                    android:layout_below="@+id/civ_profile_userPhoto"
+                    android:text="확인"
+                    android:visibility="invisible"
+                    />
+                <View
+                    android:id="@+id/lineProfile"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/civ_profile_userPhoto"
+                    android:layout_centerHorizontal="true"/>
+                <Button
+                    android:id="@+id/btn_profile_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/lineProfile"
+                    android:layout_below="@+id/civ_profile_userPhoto"
+                    android:text="취소"
+                    android:visibility="invisible"
+                    />
+
+            </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_profile_nick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="user"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            />
+
+        <Button
+            android:id="@+id/btn_profile_changePW"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="비밀번호 변경"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#81c147"
+            />
+
+        <Button
+            android:id="@+id/btn_profile_logout"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="로그아웃"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#81c147"
+            />
+
+        <Button
+            android:id="@+id/btn_profile_readUse"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="이용약관"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#81c147"
+            />
+
+        <Button
+            android:id="@+id/btn_profile_withdrawal"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="회원탈퇴"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#81c147"
+            />
+        </LinearLayout>
+
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_above="@id/line"
+    >
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1sp"
+    android:background="@color/black"
+    />
+</LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <ImageView
+                android:id="@+id/btn_home"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/home_icon"
+                />
+
+            <ImageView
+                android:id="@+id/btn_board"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/board_icon" />
+
+            <ImageView
+                android:id="@+id/btn_location"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/location_on_icon" />
+
+            <ImageView
+                android:id="@+id/btn_chat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/chat_icon" />
+
+            <ImageView
+                android:id="@+id/btn_profile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:src="@drawable/profile_icon" />
+
+        </LinearLayout>
+
+
+</RelativeLayout>

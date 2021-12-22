@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#dfe2d9"
+    xmlns:app="http://schemas.android.com/tools"
+    app:ignore="NamespaceTypo">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/cv_board"
+        card_view:cardCornerRadius="20dp"
+        card_view:cardElevation="30dp"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@color/white"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:layout_marginBottom="1dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/iv_board_profile"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/user_icon" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/iv_board_profile"
+                        android:layout_toLeftOf="@+id/iv_board_menu"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="nick"
+                            android:id="@+id/tv_board_nick"
+                            android:textSize="22sp" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="created"
+                            android:id="@+id/tv_board_created"
+                            android:textSize="14sp"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            />
+
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_board_menu"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_baseline_more_vert_24"
+                        android:onClick="openContextMenu"
+                        />
+                    <TextView
+                        android:id="@+id/board_idx"
+                        android:layout_toLeftOf="@id/iv_board_menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible"
+                        />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="#dfe2d9"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                // view pager2
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_board_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="content"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/sliderViewPager2"
+                    android:visibility="gone"
+                    android:layout_width="300dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center" />
+
+                <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
+                    android:visibility="invisible"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/spring_dots_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:dampingRatio="0.5"
+                    app:dotsColor="@color/material_white"
+                    app:dotsStrokeColor="@color/material_yellow"
+                    app:dotsCornerRadius="2dp"
+                    app:dotsSize="16dp"
+                    app:dotsSpacing="6dp"
+                    app:dotsStrokeWidth="2dp"
+                    app:stiffness="300"
+                    />
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/layoutIndicators"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:paddingBottom="8dp" />-->
+
+
+                <!--                            <RelativeLayout-->
+                <!--                                android:layout_gravity="center"-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"-->
+                <!--                                android:id="@+id/layoutIndicators"-->
+                <!--                                >-->
+
+                <!--                            </RelativeLayout>-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="#999999" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ddd">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="#fff"
+                    android:layout_marginBottom="1dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/imageView3"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/board_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="reply_cnt"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:id="@+id/tv_board_reply_cnt"
+                        android:layout_toRightOf="@+id/imageView3"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp" />
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:id="@+id/iv_board_right"
+                                            android:src="@drawable/right"
+                                            android:layout_centerVertical="true"
+                                            android:layout_alignParentRight="true" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
