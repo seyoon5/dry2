@@ -1,113 +1,80 @@
 package com.example.dry;
-import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.Socket;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private Handler mHandler;
-    InetAddress serverAddr;
-    Socket socket;
-    PrintWriter sendWriter;
-    private String ip = "13.125.206.46";
-    private int port = 8080;
-
-    TextView textView;
-    String UserID ;
-    Button connectbutton;
-    ImageButton chatbutton;
-    TextView chatView;
-    EditText message;
-    String sendmsg;
-    String read;
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        try {
-            sendWriter.close();
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    MyService2 myService2; // 서비스 객체
+    boolean isService = false; // 서비스 중인 확인용
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
-        mHandler = new Handler();
-        textView = (TextView) findViewById(R.id.textView);
-        chatView = (TextView) findViewById(R.id.chatView);
-        message = (EditText) findViewById(R.id.message);
-        Intent intent = getIntent();
-        UserID = intent.getStringExtra("username");
-        textView.setText(UserID);
-        chatbutton = (ImageButton) findViewById(R.id.send_btn_chat);
+        setContentView(R.layout.activity_main);
+// 데이터를 전달할 수 있는 서비스 사용하기
+// 1. 다음 Service (*.java)를 작성한다
+// 2. Service 를 등록한다 AndroidManifest.xml
+// 3. Service 를 시작한다
 
-        new Thread() {
-            public void run() {
-                try {
-                    //InetAddress serverAddr = InetAddress.getByName(ip);
-                    socket = new Socket(ip, port);
-                    sendWriter = new PrintWriter(socket.getOutputStream());
-                    BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    while(true){
-                        read = input.readLine();
+        Button b1 = (Button) findViewById(R.id.button1);
+        Button b2 = (Button) findViewById(R.id.button2);
+        Button b3 = (Button) findViewById(R.id.button3);
+        Button b4 = (Button) findViewById(R.id.button4);
 
-                        System.out.println("TTTTTTTT"+read);
-                        if(read!=null){
-                            mHandler.post(new msgUpdate(read));
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } }}.start();
+        b1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) { // 서비스 시작
+                Intent intent = new Intent(
+                        getApplicationContext(), // 현재 화면
+                        MyService.class); // 다음넘어갈 컴퍼넌트
+                startService(intent);
 
-        chatbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendmsg = message.getText().toString();
-                new Thread() {
-                    @Override
-                    public void run() {
-                        super.run();
-                        try {
-                            System.out.println("sendWriter"+sendWriter+"  userId : "+UserID+"   sendmsg"+sendmsg);
-                            System.out.println("sendWriter:"+sendWriter);
-                            sendWriter.println(UserID +">"+ sendmsg);
-                            sendWriter.flush();
-                            message.setText("");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }.start();
             }
         });
+
+        b2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) { // 서비스 종료
+                Intent intent = new Intent(
+                        getApplicationContext(), // 현재 화면
+                        MyService.class); // 다음넘어갈 컴퍼넌트
+                stopService(intent);
+
+            }
+        });
+
+
     }
 
-    class msgUpdate implements Runnable{
-        private String msg;
-        public msgUpdate(String str) {this.msg=str;}
+    ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            // 서비스와 연결되었을 때 호출되는 메서드
+            // 서비스 객체를 전역변수로 저장
+            MyService2.LocalBinder mb = (MyService2.LocalBinder) service;
+            myService2 = mb.getService(); // 서비스가 제공하는 메소드 호출하여 서비스쪽 객체를 전달받을 수 있음.
+            isService = true;
+        }
 
         @Override
-        public void run() {
-            System.out.println("??");
-            chatView.setText(chatView.getText().toString()+msg+"\n");
+        public void onServiceDisconnected(ComponentName name) {
+            isService = false;
+            Toast.makeText(myService2, "disconnected service", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(isService){
+            unbindService(conn);
+            isService = false;
         }
     }
 }

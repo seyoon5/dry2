@@ -18,15 +18,15 @@ public class EnterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_enter);
         enterButton = (Button)findViewById(R.id.enterButton);
         editText = (EditText)findViewById(R.id.editText);
-        enterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                String username = editText.getText().toString();
-                intent.putExtra("username",username);
-                startActivity(intent);
-            }
-        });
+//        enterButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+//                String username = editText.getText().toString();
+//                intent.putExtra("username",username);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 }

@@ -133,7 +133,6 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         Glide.with(holder.profile.getContext())
                 .load("http://13.125.206.46/images/" + items.getProfile())
                 .error(R.drawable.user_icon)
-                .fallback(R.drawable.user_icon)
                 .into(holder.profile);
 
         //view pager

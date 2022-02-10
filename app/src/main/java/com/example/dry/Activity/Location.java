@@ -24,7 +24,6 @@ import android.widget.Toast;
 import com.example.dry.GpsTracker;
 import com.example.dry.Item.LocationDTO;
 import com.example.dry.Item.LocationItem;
-import com.example.dry.MainActivity;
 import com.example.dry.NetworkStatus;
 import com.example.dry.R;
 import com.example.dry.RequestHttpURLConnection;

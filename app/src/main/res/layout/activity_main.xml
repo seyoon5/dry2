@@ -1,32 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-    <EditText
-        android:id="@+id/message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter message"/>
     <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/chatbutton"
-        android:text="chat"/>
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="46dp"
+        android:text="서비스시작" />
 
     <TextView
-        android:id="@+id/chatView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
-        android:background="@color/teal_700"/>
-</LinearLayout>
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:text="서비스에서 데이터 전달 받기"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="15dp"
+        android:text="서비스종료" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="24dp"
+        android:text="서비스에서 데이터 확인하기" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_below="@+id/button3"
+        android:layout_marginTop="24dp"
+        android:text="다음 엑티비티" />
+
+</RelativeLayout>

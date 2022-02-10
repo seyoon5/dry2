@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.dry.FileUtils;
+import com.example.dry.MyService;
 import com.example.dry.Retrofit.FileModel;
 import com.example.dry.Retrofit.ProfileImgUploadInterface;
 import com.example.dry.PreferenceHelper;
@@ -69,6 +70,9 @@ public class Profile extends AppCompatActivity {
         btnCancel = findViewById(R.id.btn_profile_cancel);
         nick = findViewById(R.id.tv_profile_nick);
         nick.setText(usernick);
+
+        Intent intent = new Intent(getApplicationContext(), MyService.class);
+        startService(intent);
 
         userCurrentImage = preferenceHelper.getImage();
         requirePermission();
@@ -179,6 +183,8 @@ public class Profile extends AppCompatActivity {
         String email = preferenceHelper.getEMAIL();
         String nick = preferenceHelper.getNICK();
         File file = new File(Uri.parse(selectedImage).getPath());
+        Log.e(TAG, "uploadFileToServer :selectedImage " +selectedImage);
+        Log.e(TAG, "uploadFileToServer :file " +file);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("sendimage", file.getName(), requestBody);
@@ -225,7 +231,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Profile.this, Home.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
                 overridePendingTransition(0,0);
             }
@@ -235,7 +241,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Profile.this, Board.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
                 overridePendingTransition(0,0);
             }
@@ -245,7 +251,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Profile.this, Location.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
                 overridePendingTransition(0,0);
             }
@@ -255,7 +261,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Profile.this, ChatList.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
                 overridePendingTransition(0,0);
             }

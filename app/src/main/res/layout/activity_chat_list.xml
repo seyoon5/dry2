@@ -7,50 +7,34 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignBottom="@+id/logo"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarBoard"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#008000"
         >
 
-        <EditText
-            android:id="@+id/username_edit"
-            android:layout_width="296dp"
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Username"
-            android:inputType="textEmailAddress"
-            android:padding="16dp"
-            android:textSize="16sp"
-            />
+            android:layout_gravity="center"
+            android:text="채팅"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/room_edit"
-            android:layout_width="296dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Room number"
-            android:inputType="numberSigned"
-            android:padding="16dp"
-            android:textSize="16sp" />
-    </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/enter_btn"
-        android:layout_width="296dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="32dp"
-        android:text="입장"
-        android:textSize="18sp"
-        />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_chatList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/line"
+            />
 
     <View
         android:layout_width="match_parent"

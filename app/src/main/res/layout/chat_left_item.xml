@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:paddingTop="12dp"
-    android:paddingBottom="12dp">
+    android:padding="16dp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_profile_chatLeftItem"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/user_icon"
+        android:layout_alignParentLeft="true"
+        />
 
     <TextView
         android:id="@+id/name_text"
@@ -15,9 +22,9 @@
         android:layout_marginLeft="16dp"
         android:text="이름"
         android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="16sp"
+        android:layout_toRightOf="@+id/civ_profile_chatLeftItem"
+        />
 
     <TextView
         android:id="@+id/msg_text"
@@ -31,11 +38,11 @@
         android:paddingRight="16dp"
         android:paddingBottom="4dp"
         android:text="상대방이 보낸 메세지"
+        android:layout_toRightOf="@+id/civ_profile_chatLeftItem"
+        android:layout_below="@id/name_text"
         android:textColor="#333d4b"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_text" />
-
+        android:textSize="16sp"
+        />
     <TextView
         android:id="@+id/send_time_text"
         android:layout_width="wrap_content"
@@ -44,8 +51,36 @@
         android:layout_marginTop="16dp"
         android:text="00:00"
         android:textColor="#b9bcce"
-        android:textSize="10sp"
-        app:layout_constraintStart_toEndOf="@+id/msg_text"
-        app:layout_constraintTop_toBottomOf="@+id/name_text" />
+        android:textSize="14sp"
+        android:layout_toRightOf="@id/msg_text"
+        android:layout_alignBottom="@id/msg_text"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/iv_chat_left"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+
+        android:src="@drawable/user_icon"
+        android:layout_below="@+id/name_text"
+        android:layout_toRightOf="@id/civ_profile_chatLeftItem"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/send_time_leftImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:text="00:00"
+        android:textColor="#b9bcce"
+        android:textSize="14sp"
+        android:layout_toRightOf="@id/iv_chat_left"
+        android:layout_alignBottom="@id/iv_chat_left"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

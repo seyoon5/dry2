@@ -3,7 +3,9 @@
 import android.Manifest;
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -26,6 +28,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -157,11 +160,14 @@ public class BoardWrite extends AppCompatActivity {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(takePictureIntent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
+            Log.e(TAG, "2.7  photoFile:1 ="+photoFile );
             try {
                 photoFile = createImageFile();
+                Log.e(TAG, "2.7  photoFile:2 ="+photoFile );
             } catch (IOException ex) {
                 Log.e(TAG, "내용 : dispatchTakePictureIntent,IOException" );
             } if(photoFile != null) {
+                Log.e(TAG, "2.7  photoFile:3 ="+photoFile );
                 Uri photoURI = FileProvider.getUriForFile(this, "com.example.dry.fileprovider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE); }
@@ -169,11 +175,18 @@ public class BoardWrite extends AppCompatActivity {
     }
 
     private File createImageFile() throws IOException {
+        Log.e(TAG, "createImageFile : 1" );
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = Environment.getExternalStorageDirectory();     // 저장경로 이름 확인
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);     // 저장경로 이름 확인
+        Log.e(TAG, "createImageFile : 2" );
         File image = File.createTempFile( imageFileName, ".jpg", storageDir );
+        Log.e(TAG, "createImageFile : 3" );
+
         mCurrentPhotoPath = image.getAbsolutePath();
+        Log.e(TAG, "createImageFile : 4" );
+        Log.e(TAG, "createImageFile : image="+image );
+
         return image;
     }
 

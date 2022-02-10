@@ -3,6 +3,12 @@
         <item>도보 이용경로</item>
         <item>상세히</item>
     </string-array>
+
+    <string-array name="selectImage">
+        <item>카메라</item>
+        <item>갤러리</item>
+    </string-array>
+
     <string name="app_name">dry</string>
     <string name="write"></string>
     <string name="profile">회원정보</string>

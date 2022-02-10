@@ -1,7 +1,12 @@
 package com.example.dry.Retrofit;
 
+import com.example.dry.Item.ChatDTO;
+import com.example.dry.Item.ChatListModel;
+import com.example.dry.Item.ChatRoomItem;
 import com.example.dry.Item.LocationDTO;
+import com.example.dry.Item.RoomNoModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -11,12 +16,94 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
+
+    @Multipart
+    @POST("makeImage.php")
+    Call<FileModel> makeImageApi(
+            @Part MultipartBody.Part image
+    );
+
+    @FormUrlEncoded
+    @POST("getIdx.php")
+    Call<ChatDTO> getIdxApi(
+            @Field("idx") String idx
+    );
+
+    @FormUrlEncoded
+    @POST("getRoomUsers.php")
+    Call<String> getRoomUsersApi(
+            @Field("idx") String idx
+    );
+
+    @FormUrlEncoded
+    @POST("exit.php")
+    Call<String> exitApi(
+            @Field("idx") String idx
+    );
+
+    @FormUrlEncoded
+    @POST("entered.php")
+    Call<String> enteredApi(
+            @Field("idx") String idx
+    );
+
+    @FormUrlEncoded
+    @POST("readMsg2.php")
+    Call<String> readMsg2Api(
+            @Field("idx") String idx
+    );
+
+    @FormUrlEncoded
+    @POST("readMsg.php")
+    Call<String> readMsgApi(
+            @Field("idx") String idx
+    );
+
+    @FormUrlEncoded
+    @POST("makeRoom.php")
+    Call<String> makeRoomApi(
+            @Field("user") String user,
+            @Field("receiverProfile") String receiverProfile,
+            @Field("sender") String sender,
+            @Field("receiver") String receiver,
+            @Field("content") String content,
+            @Field("senderProfile") String senderProfile,
+            @Field("time") String time,
+            @Field("count") int count
+    );
+
+    @FormUrlEncoded
+    @POST("getRoomNo.php")
+    Call<RoomNoModel> getRoomNoApi(
+            @Field("sender") String sender,
+            @Field("receiver") String receiver
+    );
+
+    @GET("chatMsg.php")
+    Call<List<ChatModel>> getChatMsgApi(
+            @Query("room_num") String room_num
+    );
+
+    @GET("chatList.php")
+    Call<List<ChatListModel>> getChatListApi(
+            @Query("sender") String sender
+    );
+
+    @FormUrlEncoded
+    @POST("chat_info.php")
+    Call<String> getChatRoomInfo(
+            @Field("receiver") String usernick,
+            @Field("sender") String nick
+    );
 
     @GET("location.php")
     Call<LocationDTO> locationApi(

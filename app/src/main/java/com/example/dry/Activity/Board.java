@@ -44,12 +44,17 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class Board extends AppCompatActivity {
     ImageView home, board, location, chat, profile;
     private String TAG = "board";
+
     private String idx;
     private String nick;
+    private String userProfile;
+
     private NestedScrollView nestedScrollView;
     private RecyclerView mRecyclerView;
     private ProgressBar progressBar;
     private FloatingActionButton floatingActionButton;
+
+    private PreferenceHelper preferenceHelper;
 
     private BoardAdapter mBoardAdapter;
     private ArrayList<BoardItem> mBoardItems;
@@ -62,68 +67,71 @@ public class Board extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
         Log.e(TAG, "onCreate : " );
+        preferenceHelper = new PreferenceHelper(this);
         nestedScrollView = findViewById(R.id.scroll_view);
         mRecyclerView = findViewById(R.id.board_recyclerView);
         progressBar = findViewById(R.id.progress_bar);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mBoardItems = new ArrayList<>();
         mBoardAdapter = new BoardAdapter(mBoardItems);
-                mRecyclerView.setAdapter(mBoardAdapter);
-                mBoardAdapter.setOnItemClickListener(new BoardAdapter.OnItemClickEventListener() {
+        mRecyclerView.setAdapter(mBoardAdapter);
+        mBoardAdapter.setOnItemClickListener(new BoardAdapter.OnItemClickEventListener() {
+            @Override
+            public void onItemClick(View a_view, int a_position) {
+                PreferenceHelper preferenceHelper = new PreferenceHelper(getApplicationContext());
+
+                idx = mBoardItems.get(a_position).getIdx();
+                nick = mBoardItems.get(a_position).getNick();
+                userProfile = mBoardItems.get(a_position).getProfile();
+
+                final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), a_view);
+
+                if(nick.equals(preferenceHelper.getNICK())){
+                    getMenuInflater().inflate(R.menu.crud_menu, popupMenu.getMenu());
+                }else {
+                    getMenuInflater().inflate(R.menu.chat_menu, popupMenu.getMenu());
+                }
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public void onItemClick(View a_view, int a_position) {
-                        PreferenceHelper preferenceHelper = new PreferenceHelper(getApplicationContext());
+                    public boolean onMenuItemClick(MenuItem item) {
 
-                        idx = mBoardItems.get(a_position).getIdx();
-                        nick = mBoardItems.get(a_position).getNick();
-
-                        final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), a_view);
-
-                        if(nick.equals(preferenceHelper.getNICK())){
-                            getMenuInflater().inflate(R.menu.crud_menu, popupMenu.getMenu());
-                        }else {
-                            getMenuInflater().inflate(R.menu.chat_menu, popupMenu.getMenu());
-                        }
-
-                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem item) {
-
-                                switch (item.getItemId()){
-                                    case R.id.update:
-                                        Intent i = new Intent(Board.this, BoardUpdate.class);
-                                        i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                        i.putExtra("idx", idx);
-                                        startActivity(i);
-                                        overridePendingTransition(0, 0);
-                                        return false;
-                                    case R.id.delete:
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(Board.this);
-                                        builder.setTitle("삭제");
-                                        builder.setMessage("정말 삭제하시겠습니까?");
-                                        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                deleteToServer();
-                                            }
-                                        });
-                                        builder.setNegativeButton("아니오", null);
-                                        builder.create().show();
-                                        return false;
-                                    case R.id.chat:
-                                        Intent intent = new Intent(Board.this, Chat.class);
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                        intent.putExtra("username", nick);
-                                        startActivity(intent);
-                                        overridePendingTransition(0, 0);
-                                        return false;
-                                }
+                        switch (item.getItemId()){
+                            case R.id.update:
+                                Intent i = new Intent(Board.this, BoardUpdate.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                i.putExtra("idx", idx);
+                                startActivity(i);
+                                overridePendingTransition(0, 0);
                                 return false;
-                            }
-                        });
-                        popupMenu.show();
+                            case R.id.delete:
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Board.this);
+                                builder.setTitle("삭제");
+                                builder.setMessage("정말 삭제하시겠습니까?");
+                                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        deleteToServer();
+                                    }
+                                });
+                                builder.setNegativeButton("아니오", null);
+                                builder.create().show();
+                                return false;
+                            case R.id.chat:
+                                Intent intent = new Intent(Board.this, Chat.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                intent.putExtra("username", nick);
+                                intent.putExtra("userProfile", userProfile);
+                                startActivity(intent);
+                                overridePendingTransition(0, 0);
+                                return false;
+                        }
+                        return false;
                     }
                 });
+                popupMenu.show();
+            }
+        });
 
         floatingActionButton = findViewById(R.id.btn_board_floating);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +141,6 @@ public class Board extends AppCompatActivity {
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 overridePendingTransition(0, 0);
-
             }
         });
         getData(page, limit);
@@ -241,26 +248,26 @@ public class Board extends AppCompatActivity {
         }
     }
     private void deleteToServer(){
-            Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
-                    .addConverterFactory(ScalarsConverterFactory.create()).build();
-            ApiInterface service = retrofit.create(ApiInterface.class);
-            Call<String> call = service.deleteBoard(idx);
-            call.enqueue(new Callback<String>() {
-                             @Override
-                             public void onResponse(Call<String> call, Response<String> response) {
-                                 finish();
-                                 Intent i = new Intent(Board.this, Board.class);
-                                 startActivity(i);
-                                 overridePendingTransition(0, 0);
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+                .addConverterFactory(ScalarsConverterFactory.create()).build();
+        ApiInterface service = retrofit.create(ApiInterface.class);
+        Call<String> call = service.deleteBoard(idx);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                finish();
+                Intent i = new Intent(Board.this, Board.class);
+                startActivity(i);
+                overridePendingTransition(0, 0);
 
-                                 Log.e(TAG, "onResponse : " +response.body());
-                             }
+                Log.e(TAG, "onResponse : " +response.body());
+            }
 
-                             @Override
-                             public void onFailure(Call<String> call, Throwable t) {
-                                 Log.e(TAG, "onFailure : " +t.getMessage());
-                             }
-                         });
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "onFailure : " +t.getMessage());
+            }
+        });
     }
 
     //메뉴 엑티비티, 앱 종료
@@ -270,7 +277,7 @@ public class Board extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Board.this, Home.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
                 overridePendingTransition(0, 0);
 
@@ -287,7 +294,7 @@ public class Board extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Board.this, Location.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
                 overridePendingTransition(0, 0);
 
@@ -298,7 +305,7 @@ public class Board extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Board.this, ChatList.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
                 overridePendingTransition(0, 0);
 
@@ -309,7 +316,7 @@ public class Board extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Board.this, Profile.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
                 overridePendingTransition(0, 0);
 
@@ -337,7 +344,7 @@ public class Board extends AppCompatActivity {
 //            }
 //        });
 
-        //메서드로 만들어도 됨
+//메서드로 만들어도 됨
 //        try {
 //            JSONObject jsonObject = new JSONObject(jsonobj);
 //            JSONArray jsonArray = jsonObject.getJSONArray(document);
@@ -358,4 +365,3 @@ public class Board extends AppCompatActivity {
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-
