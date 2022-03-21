@@ -63,7 +63,8 @@ public class ChatList extends AppCompatActivity {
     private DataInputStream read = null;
     private DataOutputStream write = null;
 
-    private String IP = "13.125.206.46";
+    //private String IP = "13.125.206.46";
+    private String IP = "3.34.5.22";
     private int PORT = 8080;
 
     @Override

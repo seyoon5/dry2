@@ -57,7 +57,7 @@ public class BoardUpdateAdapter extends RecyclerView.Adapter<BoardUpdateAdapter.
             holder.thumbNail.setImageURI(Uri.parse(items.getImage()));
         }else {
             Glide.with(holder.thumbNail.getContext())
-                    .load("http://13.125.206.46/images/" + items.getImage())
+                    .load("http://3.34.5.22/images/" + items.getImage())
                     .error(R.drawable.user_icon)
                     .fallback(R.drawable.user_icon)
                     .into(holder.thumbNail);

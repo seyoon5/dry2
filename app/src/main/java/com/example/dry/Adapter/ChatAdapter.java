@@ -172,7 +172,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         public void setItem(ChatItem item){
             Glide.with(itemView)
-                    .load("http://13.125.206.46/images/" + item.getProfile())
+                    .load("http://3.34.5.22/images/" + item.getProfile())
                     .error(R.drawable.user_icon)
                     .fallback(R.drawable.user_icon)
                     .into(profile);
@@ -184,7 +184,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 contentText.setVisibility(View.GONE);
                 sendTimeText.setVisibility(View.GONE);
                 Glide.with(itemView)
-                        .load("http://13.125.206.46/images/" + item.getContent())
+                        .load("http://3.34.5.22/images/" + item.getContent())
                         .into(iv_chatLeft);
                 sendTimeTextLeft.setText(item.getSendTime());
                 contentText.setText(item.getContent());
@@ -245,7 +245,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 sendTimeText.setVisibility(View.GONE);
 
                 Glide.with(itemView)
-                        .load("http://13.125.206.46/images/" + item.getContent())
+                        .load("http://3.34.5.22/images/" + item.getContent())
                         .into(img);
                 sendTimeImg.setText(item.getSendTime());
                 contentText.setText(item.getContent());

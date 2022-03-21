@@ -112,7 +112,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                     holder.readCnt.setVisibility(View.GONE);
                 }
                 Glide.with(holder.profile.getContext())
-                        .load("http://13.125.206.46/images/" + items.getSender_profile())
+                        .load("http://3.34.5.22/images/" + items.getSender_profile())
                         .error(R.drawable.user_icon)
                         .into(holder.profile);
             }else if(me.equals(items.getSender())){
@@ -128,7 +128,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                     holder.readCnt.setVisibility(View.GONE);
                 }
                 Glide.with(holder.profile.getContext())
-                        .load("http://13.125.206.46/images/" + items.getReceiver_profile())
+                        .load("http://3.34.5.22/images/" + items.getReceiver_profile())
                         .error(R.drawable.user_icon)
                         .into(holder.profile);
             }

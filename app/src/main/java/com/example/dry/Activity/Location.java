@@ -286,6 +286,8 @@ public class Location extends AppCompatActivity implements NaverMap.OnMapClickLi
 
             resetPolyLineList();
 
+            Log.e(TAG, "check result : "+s);
+
             try {
                 //전체 데이터를 제이슨 객체로 변환
                 JSONObject root = new JSONObject(s);

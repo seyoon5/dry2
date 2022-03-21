@@ -42,7 +42,7 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
         if(!viewPagerItem.getSubImage().equals("none")) {
             holder.mImageView.setVisibility(View.VISIBLE);
             Glide.with(holder.mImageView)
-                    .load("http://13.125.206.46/images/" + viewPagerItem.getSubImage())
+                    .load("http://3.34.5.22/images/" + viewPagerItem.getSubImage())
                     .fallback(null)
                     .into(holder.mImageView);
         }else{

@@ -79,7 +79,8 @@ public class Profile extends AppCompatActivity {
 
         if(!userCurrentImage.equals("null") && !userCurrentImage.equals("")){
         Glide.with(Profile.this)
-                .load("http://13.125.206.46/images/"+userCurrentImage)
+                //.load("http://13.125.206.46/images/"+userCurrentImage)
+                .load("http://3.34.5.22/images/"+userCurrentImage)
                 .into(civProfile);
         }
 
@@ -171,7 +172,8 @@ public class Profile extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Glide.with(Profile.this)
-                                .load("http://13.125.206.46/images/"+userCurrentImage)
+                                //.load("http://13.125.206.46/images/"+userCurrentImage)
+                                .load("http://3.34.5.22/images/"+userCurrentImage)
                                 .into(civProfile);
                         btnConfirm.setVisibility(View.INVISIBLE);
                         btnCancel.setVisibility(View.INVISIBLE);

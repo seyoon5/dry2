@@ -97,7 +97,8 @@ public class Chat extends AppCompatActivity {
     private DataInputStream read = null;
     private DataOutputStream write = null;
 
-    private String IP = "13.125.206.46";
+    //private String IP = "13.125.206.46";
+    private String IP = "3.34.5.22";
     private int PORT = 8080;
     private Handler mHandler;
 
@@ -296,7 +297,8 @@ public class Chat extends AppCompatActivity {
     }
 
     private void entered(String idx) {
-                Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+                //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+                Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                         .addConverterFactory(ScalarsConverterFactory.create()).build();
                 ApiInterface service = retrofit.create(ApiInterface.class);
                 Call<String> call = service.enteredApi(idx);
@@ -331,7 +333,8 @@ public class Chat extends AppCompatActivity {
             return;
         }
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                 .addConverterFactory(ScalarsConverterFactory.create()).build();
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<String> call = service.makeRoomApi(user, receiverProfile, sender, receiver, content, senderProfile, time, count);
@@ -515,7 +518,8 @@ public class Chat extends AppCompatActivity {
 
     private void exit(String idx) {
 
-                Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+                //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+                Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                         .addConverterFactory(ScalarsConverterFactory.create()).build();
                 ApiInterface service = retrofit.create(ApiInterface.class);
                 Call<String> call = service.exitApi(idx);
@@ -534,7 +538,8 @@ public class Chat extends AppCompatActivity {
     }
 
     private void receiverCount() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                 .addConverterFactory(ScalarsConverterFactory.create()).build();
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<String> call = service.readMsgApi(chatListRoomIdx);
@@ -554,7 +559,8 @@ public class Chat extends AppCompatActivity {
     }
 
     private void senderCount() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                 .addConverterFactory(ScalarsConverterFactory.create()).build();
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<String> call = service.readMsg2Api(chatListRoomIdx);

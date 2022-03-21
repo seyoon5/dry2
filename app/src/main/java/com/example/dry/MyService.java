@@ -60,7 +60,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class MyService extends Service {
     private static final String TAG = "MyService";
 
-    private String IP = "13.125.206.46";
+    //private String IP = "13.125.206.46";
+    private String IP = "3.34.5.22";
     private int PORT = 8080;
     private Socket mSocket;
     private DataOutputStream write = null;
@@ -344,14 +345,14 @@ public class MyService extends Service {
 
                                     // noti 이미지 비트맵 가져오기.
                                     if(sender.equals(s_sender)){
-                                        Glide.with(getApplicationContext()).asBitmap().load("http://13.125.206.46/images/"+s_receiverProfile).into(new SimpleTarget<Bitmap>() {
+                                        Glide.with(getApplicationContext()).asBitmap().load("http://3.34.5.22/images/"+s_receiverProfile).into(new SimpleTarget<Bitmap>() {
                                             @Override
                                             public void onResourceReady(@NonNull @NotNull Bitmap resource, @Nullable @org.jetbrains.annotations.Nullable Transition<? super Bitmap> transition) {
                                                 image = resource;
                                             }
                                         });
                                     }else{
-                                        Glide.with(getApplicationContext()).asBitmap().load("http://13.125.206.46/images/"+s_senderProfile).into(new SimpleTarget<Bitmap>() {
+                                        Glide.with(getApplicationContext()).asBitmap().load("http://3.34.5.22/images/"+s_senderProfile).into(new SimpleTarget<Bitmap>() {
                                             @Override
                                             public void onResourceReady(@NonNull @NotNull Bitmap resource, @Nullable @org.jetbrains.annotations.Nullable Transition<? super Bitmap> transition) {
                                                 image = resource;
@@ -416,7 +417,8 @@ public class MyService extends Service {
 
     private void getRoomUsers(String idx, String s_sender, String s_msg, String s_time, String s_receiver, String s_receiverProfile, String s_senderProfile) {
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                 .addConverterFactory(ScalarsConverterFactory.create()).build();
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<String> call = service.getRoomUsersApi(idx);

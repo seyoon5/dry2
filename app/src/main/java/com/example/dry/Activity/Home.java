@@ -63,7 +63,8 @@ public class Home extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mHomeItems = new ArrayList<>();
         GetData task = new GetData();
-        task.execute("http://13.125.206.46/home.php");
+        task.execute("http://3.34.5.22/home.php");
+        //task.execute("http://13.125.206.46/home.php");
 
         mHomeAdapter.setOnItemClickListener(new HomeAdapter.OnItemClickEventListener() {
             @Override
@@ -104,7 +105,8 @@ public class Home extends AppCompatActivity {
                 Toast.makeText(Home.this, "onPostExecute 실패", Toast.LENGTH_SHORT).show();
             }else {
                 mJsonString = s;
-                Log.e(TAG, "showResult : " );
+                Log.e(TAG, "showResult: DOC 2= "+DOC);
+                Log.e(TAG, "뭐야 = "+mJsonString);
                 showResult();
             }
         }
@@ -159,6 +161,7 @@ public class Home extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(DOC);
+            Log.e(TAG, "showResult: DOC1 = "+DOC);
 
             for(int i = 0; i<jsonArray.length(); i++){
                 JSONObject item = jsonArray.getJSONObject(i);

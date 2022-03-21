@@ -27,7 +27,8 @@ public class RetrofitBuilder {
 
         if(retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://13.125.206.46/")
+                    //.baseUrl("http://13.125.206.46/")
+                    .baseUrl("http://3.34.5.22/")
                     .client(okHttpClient)
                     .addConverterFactory(new NullOnEmptyConverterFactory())
                     .addConverterFactory(GsonConverterFactory.create(gson))

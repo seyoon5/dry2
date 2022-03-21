@@ -47,7 +47,8 @@ public class ChatImage extends AppCompatActivity {
         // img 보여주기
         Intent i = getIntent();
         String img = i.getStringExtra("img");
-        url = "http://13.125.206.46/images/"+img;
+        //url = "http://13.125.206.46/images/"+img;
+        url = "http://3.34.5.22/images/"+img;
         Log.e(TAG, "내용 : img="+img );
         Glide.with(this)
                 .load(url)

@@ -158,7 +158,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.ViewHolder> 
                 holder.edit.setVisibility(View.VISIBLE);
             }
             Glide.with(holder.profile.getContext())
-                    .load("http://13.125.206.46/images/" + items.getProfile())
+                    .load("http://3.34.5.22/images/" + items.getProfile())
                     .error(R.drawable.user_icon)
                     .fallback(R.drawable.user_icon)
                     .into(holder.profile);

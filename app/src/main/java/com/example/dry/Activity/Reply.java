@@ -194,7 +194,8 @@ public class Reply extends AppCompatActivity {
         String profile = preferenceHelper.getImage();
         String parent = idx+1;
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                 .addConverterFactory(ScalarsConverterFactory.create()).build();
         ApiInterface service = retrofit.create(ApiInterface.class);
         Log.e(TAG, "reply2ToServer : " +idx);
@@ -220,7 +221,8 @@ public class Reply extends AppCompatActivity {
     private void updateToServer() {
         String content = alertContent;
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                 .addConverterFactory(ScalarsConverterFactory.create()).build();
         ApiInterface service = retrofit.create(ApiInterface.class);
         Log.e(TAG, "updateToserver : " +idx);
@@ -244,7 +246,8 @@ public class Reply extends AppCompatActivity {
     }
 
     private void deleteToServer() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                 .addConverterFactory(ScalarsConverterFactory.create()).build();
         ApiInterface service = retrofit.create(ApiInterface.class);
         String deleted = "deleted";
@@ -277,7 +280,8 @@ public class Reply extends AppCompatActivity {
         String nick = preferenceHelper.getNICK();
         String profile = preferenceHelper.getImage();
 
-                Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+                //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+                Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                         .addConverterFactory(ScalarsConverterFactory.create()).build();
                 ApiInterface service = retrofit.create(ApiInterface.class);
                 Call<String> call = service.writeReply(boardIdx, profile, nick, content);
@@ -307,7 +311,8 @@ public class Reply extends AppCompatActivity {
 
     //댓글 내용 불러오기
     private void showReplyContent() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                 .addConverterFactory(ScalarsConverterFactory.create()).build();
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<String> call = service.getReplyContent(board_idx);

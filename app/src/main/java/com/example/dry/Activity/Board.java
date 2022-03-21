@@ -53,7 +53,6 @@ public class Board extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ProgressBar progressBar;
     private FloatingActionButton floatingActionButton;
-
     private PreferenceHelper preferenceHelper;
 
     private BoardAdapter mBoardAdapter;
@@ -179,7 +178,8 @@ public class Board extends AppCompatActivity {
 
     //게시판 내용 불러오기
     private void getData(int page, int limit) {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                 .addConverterFactory(ScalarsConverterFactory.create()).build();
         BoardInterface service = retrofit.create(BoardInterface.class);
         Call<String> call = service.boardApi(page, limit);
@@ -248,7 +248,8 @@ public class Board extends AppCompatActivity {
         }
     }
     private void deleteToServer(){
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.125.206.46/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://3.34.5.22/")
                 .addConverterFactory(ScalarsConverterFactory.create()).build();
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<String> call = service.deleteBoard(idx);
